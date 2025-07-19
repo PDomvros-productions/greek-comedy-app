@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreekCommedyApp - Βρες τον Χαρακτήρα σου! 🎉</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        /* Βασικά στυλ για την εφαρμογή με Candy Crush επιρροές και emojis */
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif; /* Πιο παιχνιδιάρικη γραμματοσειρά */
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #FF69B4 10%, #FFD700 100%); /* Ζωντανό gradient */
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            overflow-x: hidden; /* Αποφυγή οριζόντιου scroll */
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.95); /* Ελαφρώς διάφανο λευκό */
+            padding: 30px;
+            border-radius: 25px; /* Πιο στρογγυλεμένες γωνίες */
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Έντονη σκιά */
+            box-sizing: border-box;
+            border: 5px solid #8A2BE2; /* Μωβ περίγραμμα */
+        }
+        h1, h2 {
+            color: #FF1493; /* Βαθύ ροζ */
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px #FFD700; /* Χρυσή σκιά */
+        }
+        .intro, .quiz-section, .result-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 3px dashed #DA70D6; /* Μωβ-ροζ διακεκομμένο περίγραμμα */
+            border-radius: 15px;
+            background-color: #FFF0F5; /* Ανοιχτό ροζ φόντο */
+            box-shadow: inset 0 0 10px rgba(255, 105, 180, 0.3); /* Ελαφριά εσωτερική σκιά */
+        }
+        .intro p, .intro div {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            color: #4B0082; /* Indigo */
+        }
+        .license-text {
+            font-size: 0.75em; /* Πολύ μικρότερα γράμματα */
+            color: #6A5ACD; /* Ανοιχτότερο μωβ */
+            text-align: center;
+            display: block; /* Για να είναι σε δική του γραμμή */
+            margin-top: -5px; /* Να έρθει πιο κοντά στο δημιουργό */
+        }
+        .question-container {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #FFE4B5; /* Ανοιχτό πορτοκαλί */
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(255, 165, 0, 0.2);
+        }
+        .question-container h3 {
+            margin-top: 0;
+            color: #D2691E; /* Σοκολατί */
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px #FFD700;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 12px;
+            padding: 12px 15px;
+            background-color: #98FB98; /* Ανοιχτό πράσινο */
+            border: 2px solid #32CD32; /* Πράσινο περίγραμμα */
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 2px 2px 5px rgba(0, 128, 0, 0.2);
+        }
+        .options label:hover {
+            background-color: #ADFF2F; /* Λαμπερό πράσινο */
+            border-color: #228B22;
+            transform: scale(1.02); /* Ελαφρύ zoom */
+        }
+        .options input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.3); /* Μεγαλύτερα radio buttons */
+            accent-color: #FF4500; /* Πορτοκαλί για τα radio buttons */
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            background-color: #FF4500; /* Έντονο πορτοκαλί-κόκκινο */
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.3em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            margin-top: 25px;
+            box-shadow: 0 4px 15px rgba(255, 69, 0, 0.4);
+            letter-spacing: 1px;
+        }
+        button:hover {
+            background-color: #FF0000; /* Πιο κόκκινο */
+            transform: translateY(-3px) scale(1.01);
+        }
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(255, 69, 0, 0.6);
+        }
+        .result-section {
+            display: none;
+            text-align: center;
+            background-color: #E0FFFF; /* Ανοιχτό τιρκουάζ */
+            border: 3px solid #00CED1; /* Σκούρο τιρκουάζ */
+            box-shadow: 0 4px 20px rgba(0, 206, 209, 0.3);
+        }
+        .character-bio {
+            margin-top: 20px;
+            text-align: left;
+            border-top: 2px dashed #9370DB; /* Μωβ-ροζ γραμμή */
+            padding-top: 20px;
+            color: #483D8B; /* Σκούρο μωβ */
+        }
+        .character-bio h3 {
+            color: #FF00FF; /* Φούξια */
+            font-size: 1.8em;
+            text-shadow: 1px 1px #FF69B4;
+        }
+        .character-bio p {
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        .character-bio strong {
+            color: #8A2BE2; /* Μπλε-μωβ */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>GreekCommedyApp 🎉🍭</h1>
+        </header>
+
+        <section class="intro">
+            <p>Οι περισσότεροι και οι περισσότερες από μας περάσαμε μεγάλο κομμάτι της ενήλικης ζωής μας με αυτές τις σειρές. Τα νεώτερα παιδιά τις μαθαίνουν από τις επαναλήψεις. Το GreekCommedyApp είναι μια εφαρμογή φόρος τιμής στις σειρές αυτές, στους χαρακτήρες που δημιούργησαν οι σεναριογράφοι και ενσάρκωσαν υπέροχοι και υπέροχες ηθοποιοί. Καλή σας διασκέδαση. ✨</p>
+            <div>Δημιουργός: Παναγιώτης Δόμβρος, Ιούλιος 2025</div>
+            <span class="license-text">(Αναφορά Δημιουργού – Όχι Παράγωγα Έργα 4.0 (CC-BY-ND))</span> 🍬
+        </section>
+
+        <section class="quiz-section">
+            <h2>Βρες τον χαρακτήρα σου! 🤔🕵️‍♀️</h2>
+            <div id="quiz-content">
+                </div>
+            <button id="next-button">Επόμενη Ερώτηση 👉</button>
+        </section>
+
+        <section class="result-section" id="result-section">
+            <h2>Ο χαρακτήρας που σε εκφράζει είναι: 🌟</h2>
+            <div id="character-result">
+                </div>
+            <button id="restart-button" style="display:none;">Ξανά από την αρχή! 🚀</button>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
