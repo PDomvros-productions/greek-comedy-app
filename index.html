@@ -2,114 +2,116 @@
 <html lang="el">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>GreekCommedyApp - Βρες τον Χαρακτήρα σου! 🎉</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <style>
         /* Βασικά στυλ για την εφαρμογή με Candy Crush επιρροές και emojis */
         body {
-            font-family: 'Comic Sans MS', 'Arial', sans-serif; /* Πιο παιχνιδιάρικη γραμματοσειρά */
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
             line-height: 1.6;
             margin: 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #FF69B4 10%, #FFD700 100%); /* Ζωντανό gradient */
+            padding: 10px;
+            background: linear-gradient(135deg, #FF69B4 10%, #FFD700 100%);
             color: #333;
             display: flex;
             justify-content: center;
             align-items: flex-start;
             min-height: 100vh;
-            overflow-x: hidden; /* Αποφυγή οριζόντιου scroll */
+            overflow-x: hidden;
         }
         .container {
             max-width: 800px;
-            width: 100%;
-            margin: 20px auto;
-            background: rgba(255, 255, 255, 0.95); /* Ελαφρώς διάφανο λευκό */
-            padding: 30px;
-            border-radius: 25px; /* Πιο στρογγυλεμένες γωνίες */
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Έντονη σκιά */
+            width: 95%;
+            margin: 10px auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
             box-sizing: border-box;
-            border: 5px solid #8A2BE2; /* Μωβ περίγραμμα */
+            border: 5px solid #8A2BE2;
         }
         h1, h2 {
-            color: #FF1493; /* Βαθύ ροζ */
+            color: #FF1493;
             text-align: center;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px #FFD700; /* Χρυσή σκιά */
+            margin-bottom: 15px;
+            text-shadow: 2px 2px #FFD700;
+            font-size: 1.5em;
         }
         .intro, .quiz-section, .result-section {
-            margin-bottom: 30px;
-            padding: 20px;
-            border: 3px dashed #DA70D6; /* Μωβ-ροζ διακεκομμένο περίγραμμα */
-            border-radius: 15px;
-            background-color: #FFF0F5; /* Ανοιχτό ροζ φόντο */
-            box-shadow: inset 0 0 10px rgba(255, 105, 180, 0.3); /* Ελαφριά εσωτερική σκιά */
-        }
-        .intro p, .intro div {
-            margin-bottom: 10px;
-            font-size: 1.1em;
-            color: #4B0082; /* Indigo */
-        }
-        .license-text {
-            font-size: 0.75em; /* Πολύ μικρότερα γράμματα */
-            color: #6A5ACD; /* Ανοιχτότερο μωβ */
-            text-align: center;
-            display: block; /* Για να είναι σε δική του γραμμή */
-            margin-top: -5px; /* Να έρθει πιο κοντά στο δημιουργό */
-        }
-        .question-container {
             margin-bottom: 20px;
             padding: 15px;
-            background-color: #FFE4B5; /* Ανοιχτό πορτοκαλί */
+            border: 3px dashed #DA70D6;
+            border-radius: 15px;
+            background-color: #FFF0F5;
+            box-shadow: inset 0 0 10px rgba(255, 105, 180, 0.3);
+        }
+        .intro p, .intro div {
+            margin-bottom: 8px;
+            font-size: 1em;
+            color: #4B0082;
+        }
+        .license-text {
+            font-size: 0.7em;
+            color: #6A5ACD;
+            text-align: center;
+            display: block;
+            margin-top: -5px;
+        }
+        .question-container {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #FFE4B5;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(255, 165, 0, 0.2);
         }
         .question-container h3 {
             margin-top: 0;
-            color: #D2691E; /* Σοκολατί */
-            font-size: 1.3em;
-            margin-bottom: 15px;
+            color: #D2691E;
+            font-size: 1.1em;
+            margin-bottom: 12px;
             text-shadow: 1px 1px #FFD700;
         }
         .options label {
             display: block;
-            margin-bottom: 12px;
-            padding: 12px 15px;
-            background-color: #98FB98; /* Ανοιχτό πράσινο */
-            border: 2px solid #32CD32; /* Πράσινο περίγραμμα */
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #98FB98;
+            border: 2px solid #32CD32;
             border-radius: 8px;
             cursor: pointer;
             transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
             box-shadow: 2px 2px 5px rgba(0, 128, 0, 0.2);
+            font-size: 0.9em;
         }
         .options label:hover {
-            background-color: #ADFF2F; /* Λαμπερό πράσινο */
+            background-color: #ADFF2F;
             border-color: #228B22;
-            transform: scale(1.02); /* Ελαφρύ zoom */
+            transform: scale(1.02);
         }
         .options input[type="radio"] {
-            margin-right: 10px;
-            transform: scale(1.3); /* Μεγαλύτερα radio buttons */
-            accent-color: #FF4500; /* Πορτοκαλί για τα radio buttons */
+            margin-right: 8px;
+            transform: scale(1.2);
+            accent-color: #FF4500;
         }
         button {
             display: block;
             width: 100%;
-            padding: 18px;
-            background-color: #FF4500; /* Έντονο πορτοκαλί-κόκκινο */
+            padding: 15px;
+            background-color: #FF4500;
             color: white;
             border: none;
             border-radius: 10px;
-            font-size: 1.3em;
+            font-size: 1.1em;
             font-weight: bold;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.1s ease;
-            margin-top: 25px;
+            margin-top: 20px;
             box-shadow: 0 4px 15px rgba(255, 69, 0, 0.4);
             letter-spacing: 1px;
         }
         button:hover {
-            background-color: #FF0000; /* Πιο κόκκινο */
+            background-color: #FF0000;
             transform: translateY(-3px) scale(1.01);
         }
         button:active {
@@ -119,28 +121,65 @@
         .result-section {
             display: none;
             text-align: center;
-            background-color: #E0FFFF; /* Ανοιχτό τιρκουάζ */
-            border: 3px solid #00CED1; /* Σκούρο τιρκουάζ */
+            background-color: #E0FFFF;
+            border: 3px solid #00CED1;
             box-shadow: 0 4px 20px rgba(0, 206, 209, 0.3);
         }
         .character-bio {
-            margin-top: 20px;
+            margin-top: 15px;
             text-align: left;
-            border-top: 2px dashed #9370DB; /* Μωβ-ροζ γραμμή */
-            padding-top: 20px;
-            color: #483D8B; /* Σκούρο μωβ */
+            border-top: 2px dashed #9370DB;
+            padding-top: 15px;
+            color: #483D8B;
         }
         .character-bio h3 {
-            color: #FF00FF; /* Φούξια */
-            font-size: 1.8em;
+            color: #FF00FF;
+            font-size: 1.5em;
             text-shadow: 1px 1px #FF69B4;
         }
         .character-bio p {
             margin-bottom: 8px;
-            font-size: 1.1em;
+            font-size: 1em;
         }
         .character-bio strong {
-            color: #8A2BE2; /* Μπλε-μωβ */
+            color: #8A2BE2;
+        }
+
+        /* Media queries για κινητά */
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+                width: 92%;
+            }
+            h1, h2 {
+                font-size: 1.3em;
+            }
+            .intro, .quiz-section, .result-section {
+                padding: 12px;
+            }
+            .options label {
+                padding: 8px;
+                font-size: 0.85em;
+            }
+            button {
+                padding: 12px;
+                font-size: 1em;
+            }
+            .character-bio h3 {
+                font-size: 1.3em;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .container {
+                padding: 10px;
+            }
+            h1, h2 {
+                font-size: 1.2em;
+            }
+            .options label {
+                font-size: 0.8em;
+            }
         }
     </style>
 </head>
